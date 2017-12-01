@@ -49,7 +49,12 @@ function generateFeed(userData) {
         _url: item.enclosure.url,
         _length: item.enclosure.length,
         _type: item.enclosure.type
-      }
+      },
+      'itunes:title': item['itunes:title'],
+      'itunes:summary': item['itunes:summary'],
+      'itunes:episodeType': item['itunes:episodeType'],
+      'itunes:explicit': item['itunes:explicit'],
+      'itunes:season': item['itunes:season']
     };
   });
 
@@ -66,7 +71,17 @@ function generateFeed(userData) {
         "lastBuildDate": rssDateString(data.lastBuildDate),
         "pubDate": rssDateString(data.pubDate),
         "webMaster": data.webMaster,
-        "item": items
+        "item": items,
+        "itunes:type": data['itunes:type'],
+        "itunes:subtitle": data['itunes:subtitle'],
+        "itunes:summary": data['itunes:summary'],
+        "itunes:author": data['itunes:author'],
+        "itunes:category": {
+            _text: data['itunes:category'],
+        },
+        "itunes:explicit": data['itunes:explicit'],
+        "itunes:image": data['itunes:image'],
+        "itunes:owner": data['itunes:owner']
       }]
     }
   };

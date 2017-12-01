@@ -40,7 +40,12 @@ function getPodcastItem(bucket, item) {
         url: `https://s3.amazonaws.com/${bucket.name}/${encodeTitle(item.filename)}${extension}`,
         length: duration,
         type
-      }
+      },
+      'itunes:title': item['itunes:title'],
+      'itunes:summary': item['itunes:summary'],
+      'itunes:episodeType': item['itunes:episodeType'],
+      'itunes:explicit': item['itunes:explicit'],
+      'itunes:season': item['itunes:season']
     };
   });
 }
@@ -78,10 +83,20 @@ async function sync(bucketName, data, logger) {
   const feedData = {
     title: data.title,
     description: data.description,
+    copyright: data.copyright,
     link: `https://s3.amazonaws.com/${bucket.name}/feed.rss`,
+    language: data.language,
     pubDate: data.pubDate,
     lastBuildDate: data.lastBuildDate,
-    items: podcastItems
+    items: podcastItems,
+    "itunes:type": data['itunes:type'],
+    "itunes:subtitle": data['itunes:subtitle'],
+    "itunes:summary": data['itunes:summary'],
+    "itunes:author": data['itunes:author'],
+    "itunes:category": data['itunes:category'],
+    "itunes:explicit": data['itunes:explicit'],
+    "itunes:image": data['itunes:image'],
+    "itunes:owner": data['itunes:owner']
   };
   const serializedFeedData = builder(feedData);
   info("(s3-podcast) generated feed");
