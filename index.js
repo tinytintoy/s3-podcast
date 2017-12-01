@@ -37,7 +37,7 @@ function getPodcastItem(bucket, item) {
       description: item.description,
       pubDate: item.pubDate,
       enclosure: {
-        url: `https://s3.amazonaws.com/${bucket.name}/${encodeTitle(item.title)}${extension}`,
+        url: `https://s3.amazonaws.com/${bucket.name}/${encodeTitle(item.filename)}${extension}`,
         length: duration,
         type
       }
@@ -48,7 +48,7 @@ function getPodcastItem(bucket, item) {
 function upsertItem(bucket, item) {
   const data = fs.readFileSync(item.localPath);
   const extension = path.extname(item.localPath);
-  const key = `${encodeTitle(item.title)}${extension}`;
+  const key = `${encodeTitle(item.filename)}${extension}`;
   return bucket.upsertObject(key, data);
 }
 
