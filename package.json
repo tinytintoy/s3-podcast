@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cd spec/ && mocha spec.js"
+    "test": "cd spec/ && mocha spec.js",
+    "catrss": "cd spec/ && mocha catrss.js"
   },
   "author": "",
   "license": "MIT",
